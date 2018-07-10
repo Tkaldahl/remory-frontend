@@ -3,7 +3,7 @@ import React from 'react'
 class MemoryContainer extends React.Component {
   render () {
     return (
-      <h2>Hello World - MemoryContainer</h2>
+      <h2>User is logged in. This is the MemoryContainer Component</h2>
     )
   }
 }
