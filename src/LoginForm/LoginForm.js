@@ -7,6 +7,7 @@ class LoginForm extends React.Component {
         <form>
           <input type='text' placeholder='Email' />
           <input type='text' placeholder='Password' />
+          <input type='submit' />
         </form>
       </div>
     )

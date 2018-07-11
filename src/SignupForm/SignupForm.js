@@ -9,6 +9,7 @@ class SignupForm extends React.Component {
           <input type='text' placeholder='Last Name' />
           <input type='text' placeholder='Email' />
           <input type='text' placeholder='Password' />
+          <input type='button' />
         </form>
       </div>
     )
