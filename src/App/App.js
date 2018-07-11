@@ -8,6 +8,8 @@ import Landing from '../Landing/Landing'
 import MemoryDetail from '../MemoryDetail/MemoryDetail'
 import MemoryForm from '../MemoryForm/MemoryForm'
 import SearchForm from '../SearchForm/SearchForm'
+import LoginForm from '../LoginForm/LoginForm'
+import SignUpForm from '../SignupForm/SignupForm'
 
 class App extends Component {
   render () {
@@ -21,6 +23,14 @@ class App extends Component {
         </nav>
         <main>
           <Switch>
+            <Route
+              path='/user/login'
+              component={LoginForm}
+            />
+            <Route
+              path='/user/signup'
+              component={SignUpForm}
+            />
             <Route
               path='/landing'
               component={Landing}
