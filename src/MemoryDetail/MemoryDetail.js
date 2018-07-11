@@ -1,9 +1,10 @@
 import React from 'react'
+import CommentForm from '../CommentForm/CommentForm'
 
 class MemoryDetail extends React.Component {
   render () {
     return (
-      <h2>Hello World - MemoryDetail</h2>
+      <div>HelloWorld</div>
     )
   }
 }
