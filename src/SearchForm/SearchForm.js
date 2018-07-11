@@ -8,6 +8,7 @@ class SearchForm extends React.Component {
 
         <form>
           <input type='text' placeholder='Search for a User...' />
+          <input type='button' value='Search'
         </form>
       </div>
     )
