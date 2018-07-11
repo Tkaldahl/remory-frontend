@@ -10,6 +10,9 @@ class MemoryForm extends React.Component {
       imageURL: '',
       postString: ''
     }
+    this.setTitle = this.setTitle.bind(this)
+    this.setImage = this.setImage.bind(this)
+    this.setDetails = this.setDetails.bind(this)
   }
   render () {
     return (
@@ -23,6 +26,36 @@ class MemoryForm extends React.Component {
         </form>
       </div>
     )
+  }
+  setTitle (e) {
+    this.setState({
+      titleString: e.target.value
+    })
+  }
+  setImage (e) {
+    this.setState({
+      imageURL: e.target.value
+    })
+  }
+  setDetails (e) {
+    this.setState({
+      postString: e.target.value
+    })
+  }
+  onClick (e) {
+    this.createMemory(e)
+  }
+  createMemory (e) {
+    e.preventDefault()
+
+    axios.post('http://localhost/4000', {
+      titleString: this.state.titleString,
+      imageURL: this.state.imageURL,
+      postString: this.state.postString
+    })
+      .then((res) => {
+        this.props.history.push('/')
+      })
   }
 }
 
