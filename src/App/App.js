@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import './App.css'
-import { Route, Switch, Link } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Header from '../Header/Header'
-import SideNav from '../SideNav/SideNav'
+import SideNav from '../Sidenav/Sidenav'
 import MemoryContainer from '../MemoryContainer/MemoryContainer'
 import Landing from '../Landing/Landing'
 import MemoryDetail from '../MemoryDetail/MemoryDetail'
 import MemoryForm from '../MemoryForm/MemoryForm'
 import SearchForm from '../SearchForm/SearchForm'
+import LoginForm from '../LoginForm/LoginForm'
+import SignUpForm from '../SignupForm/SignupForm'
 
 class App extends Component {
   constructor () {
@@ -27,6 +29,14 @@ class App extends Component {
         </nav>
         <main>
           <Switch>
+            <Route
+              path='/user/login'
+              component={LoginForm}
+            />
+            <Route
+              path='/user/signup'
+              component={SignUpForm}
+            />
             <Route
               path='/memory/new'
               component={MemoryForm}
