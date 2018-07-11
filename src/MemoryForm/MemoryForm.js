@@ -3,7 +3,15 @@ import React from 'react'
 class MemoryForm extends React.Component {
   render () {
     return (
-      <h2>Hello World - MemoryForm</h2>
+      <div>
+        <h2>New Memory</h2>
+        <form>
+          <input type='text' placeholder='Title?' />
+          <input type='text' placeholder='Image Url?' />
+          <textarea rows='8' cols='50'>Memory Details...</textarea>
+          <input type='button' value='Submit Memory' />
+        </form>
+      </div>
     )
   }
 }
