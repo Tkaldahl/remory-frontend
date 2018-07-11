@@ -10,6 +10,12 @@ import MemoryForm from '../MemoryForm/MemoryForm'
 import SearchForm from '../SearchForm/SearchForm'
 
 class App extends Component {
+  constructor () {
+    super()
+    this.state = {
+      isLoggedIn: false
+    }
+  }
   render () {
     return (
       <div className='AppContainer'>
@@ -33,8 +39,8 @@ class App extends Component {
             <Route
               path='/'
               render={(props) => {
-                const isLoggedIn = props.isLoggedIn
-                if (isLoggedIn) {
+                // const isLoggedIn = this.state.isLoggedIn
+                if (this.state.isLoggedIn) {
                   return <MemoryContainer />
                 } else {
                   return <Landing />

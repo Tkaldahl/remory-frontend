@@ -13,7 +13,7 @@ import registerServiceWorker from './registerServiceWorker'
 // The code below uses a boolean to show that the user is logged in or not. Works for false, doesn't accept true.
 ReactDOM.render(
   <Router>
-    <App isLoggedIn={false} />
+    <App />
   </Router>
   , document.getElementById('root'))
 registerServiceWorker()
