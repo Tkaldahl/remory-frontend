@@ -4,8 +4,11 @@
   flex-direction: row-reverse;
   background: #B1B7D1;
   font-family: 'Sacramento', cursive;
+  margin: 0;
 }
 
 .sitetitle {
   margin-right: 2%;
+  font-size: 3em;
+  color: #7A6174;
 }
