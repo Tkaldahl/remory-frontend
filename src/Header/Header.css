@@ -1,5 +1,11 @@
 .header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: row-reverse;
+  background: #B1B7D1;
+  font-family: 'Sacramento', cursive;
+}
+
+.sitetitle {
+  margin-right: 2%;
 }
