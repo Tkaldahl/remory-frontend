@@ -38,10 +38,6 @@ class App extends Component {
               component={SignUpForm}
             />
             <Route
-              path='/landing'
-              component={Landing}
-            />
-            <Route
               path='/memory/new'
               component={MemoryForm}
             />
