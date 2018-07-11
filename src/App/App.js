@@ -10,6 +10,12 @@ import MemoryForm from '../MemoryForm/MemoryForm'
 import SearchForm from '../SearchForm/SearchForm'
 
 class App extends Component {
+  constructor () {
+    super()
+    this.state = {
+      isLoggedIn: false
+    }
+  }
   render () {
     return (
       <div className='AppContainer'>
@@ -22,10 +28,6 @@ class App extends Component {
         <main>
           <Switch>
             <Route
-              path='/landing'
-              component={Landing}
-            />
-            <Route
               path='/memory/new'
               component={MemoryForm}
             />
@@ -33,20 +35,18 @@ class App extends Component {
               path='/user/search'
               component={SearchForm}
             />
+            {/* Below is an attempt at using a boolean and conditional to put MemoryContainer and Landing on the same route. Refer to Index for the boolean as a prop */}
             <Route
-              path='/user/:id'
-              component={MemoryContainer}
-              // Above is the simple way to render a component. If we want to pass in props, use the method below.
-              //
-              // render={(props) => {
-              //   return (
-              //     <MemoryContainer
-              //       {...props}
-              //       whateverProps={(what, ever) => this.someFunction(what, ever)}
-              //     />
-              //   )
-              // }
-              // }
+              path='/'
+              render={(props) => {
+                // const isLoggedIn = this.state.isLoggedIn
+                if (this.state.isLoggedIn) {
+                  return <MemoryContainer />
+                } else {
+                  return <Landing />
+                }
+              }}
+            />
             />
             <Route
               path='/memory/:id'
