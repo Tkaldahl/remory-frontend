@@ -3,10 +3,10 @@ import React from 'react'
 class SearchForm extends React.Component {
   render () {
     return (
-      <div>
-        <h2>Search Remory</h2>
+      <div class='formcontainer'>
+        <h2 className='subheading'>Search Remory</h2>
 
-        <form>
+        <form className='form'>
           <input type='text' placeholder='Search for a User...' />
           <input type='button' value='Search' />
         </form>
