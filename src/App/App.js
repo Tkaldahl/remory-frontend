@@ -111,7 +111,7 @@ class App extends Component {
     }).then((res) => {
       console.log(res.data._id)
     }).then((res) => {
-      this.props.history.push(`/user/${res.data._id}`)
+      // this.props.history.push(`/user/${res.data._id}`)
     }
     )
   }
