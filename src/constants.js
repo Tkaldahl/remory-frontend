@@ -3,5 +3,7 @@ const colorScheme = [
   'B1B7D1', // pastel blue
   '9B9FB5', // cadet grey
   '8C7284', // rocket metallic
-  '7A6174' // old lavender
-]
+  '7A6174'] // old lavender
+
+const localroot = ''
+const api = ''
