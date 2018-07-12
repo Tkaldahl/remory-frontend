@@ -1,0 +1,22 @@
+.cardcontainer {
+  position: relative;
+  text-align: center;
+  color: whitesmoke;
+}
+
+.centered {
+  position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    text-shadow: 3px -3px black;
+}
+
+.cardimage {
+  max-height: 350px;
+  max-width: 50%;
+}
+
+img {
+}
