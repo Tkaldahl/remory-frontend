@@ -13,7 +13,7 @@ class SideNav extends React.Component {
         <Link className='navbarlink' to='/memory/new'>Add Memory</Link>
         <Link className='navbarlink' to='/user/search'>Search</Link>
         <form>
-          <input type='submit' onClick={this.props.handleLogout} />
+          <input type='submit' value='Log Out' onClick={this.props.handleLogout} />
         </form>
       </div>
     )
