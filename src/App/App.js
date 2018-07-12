@@ -23,7 +23,8 @@ class App extends Component {
       firstName: '',
       lastName: '',
       profPicture: '',
-      isLoggedIn: false
+      isLoggedIn: false,
+      loggedInUser: ''
     }
     this.inputHandler = this.inputHandler.bind(this)
     this.handleSignup = this.handleSignup.bind(this)
@@ -88,18 +89,30 @@ class App extends Component {
       .catch(err => console.log(err))
   }
 
+  // This function parses the payload so that we can save the logged in user's id into state
+  jwtDecode (t) {
+    let token = {}
+    token.raw = t
+    // token.header = JSON.parse(window.atob(t.split('.')[0]))
+    token.payload = JSON.parse(window.atob(t.split('.')[1]))
+    // console.log(token.payload.id)
+    return (token.payload.id)
+  }
+
   handleLogin (e) {
     e.preventDefault()
-    console.log(this.state.email, this.state.password)
     axios.post('http://localhost:4000/user/login', {
       email: this.state.email,
       password: this.state.password
     })
       .then(response => {
-        console.log('login firing')
         localStorage.token = response.data.token
-        this.setState({isLoggedIn: true})
-        console.log(this.state.isLoggedIn)
+        var loggedInUser = this.jwtDecode(localStorage.token)
+        this.setState({
+          isLoggedIn: true,
+          loggedInUser: loggedInUser
+        })
+        console.log(this.state.loggedInUser)
       })
       .catch(err => console.log(err))
   }
