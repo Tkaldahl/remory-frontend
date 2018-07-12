@@ -10,11 +10,13 @@ class MemoryForm extends React.Component {
     this.state = {
       titleString: '',
       imageURL: '',
-      postString: ''
+      postString: '',
+      authorEmail: ''
     }
     this.setTitle = this.setTitle.bind(this)
     this.setImage = this.setImage.bind(this)
     this.setDetails = this.setDetails.bind(this)
+    this.setEmail = this.setEmail.bind(this)
   }
   render () {
     return (
@@ -24,6 +26,7 @@ class MemoryForm extends React.Component {
           <input classname='inputfield' type='text' placeholder='Title?' />
           <input classname='inputfield' type='text' placeholder='Image Url?' />
           <textarea classname='inputfield' rows='8' cols='50'>Memory Details...</textarea>
+          <input classname='inputfield' type='text' placeholder='Author Email?' />
           <input type='button' value='Create Memory' />
         </form>
       </div>
@@ -32,6 +35,11 @@ class MemoryForm extends React.Component {
   setTitle (e) {
     this.setState({
       titleString: e.target.value
+    })
+  }
+  setEmail (e) {
+    this.setState({
+      authorEmail: e.target.value
     })
   }
   setImage (e) {
@@ -50,10 +58,11 @@ class MemoryForm extends React.Component {
   createMemory (e) {
     e.preventDefault()
 
-    axios.post('http://localhost/4000', {
+    axios.post('http://localhost/4000/memory', {
       titleString: this.state.titleString,
       imageURL: this.state.imageURL,
-      postString: this.state.postString
+      postString: this.state.postString,
+      authorEmail: this.state.authorEmail
     })
       .then((res) => {
         this.props.history.push('/')
