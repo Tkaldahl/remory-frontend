@@ -34,7 +34,7 @@ class LoginForm extends React.Component {
       email: this.state.email,
       password: this.state.password
     }
-    axios.post('https://remory-api.herokuapp.com', {loginAttempt})
+    axios.post('https://localhost:4000', {loginAttempt})
       .then(res => {
         console.log(res)
         console.log(res.data)

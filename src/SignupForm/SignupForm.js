@@ -64,7 +64,7 @@ class SignupForm extends React.Component {
       password: this.state.password,
       profPicture: this.state.profPicture
     }
-    axios.post('https://remory-api.herokuapp.com', {newUser})
+    axios.post('https://localhost:4000', {newUser})
       .then(res => {
         console.log(res)
         console.log(res.data)
