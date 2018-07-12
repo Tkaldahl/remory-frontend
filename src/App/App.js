@@ -29,6 +29,7 @@ class App extends Component {
     this.handleSignup = this.handleSignup.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   componentDidMount () {
@@ -49,6 +50,16 @@ class App extends Component {
       [e.target.className]: e.target.value
     })
   }
+
+  // stateChange = (e) => {
+  //   // making React state respond to each user form change, resulting in "single source of truth"
+  //   console.log('Submit form: stateChange()')
+  //   const keyValue = e.target.value
+  //   const keyName = e.target.name
+  //   this.setState({ notification:'...done with that quote yet?'})
+  //   this.setState({
+  //         [keyName]: keyValue
+  //       })
 
   handleLogout () {
     this.setState({
@@ -90,6 +101,15 @@ class App extends Component {
         console.log(this.state.isLoggedIn)
       })
       .catch(err => console.log(err))
+  }
+
+  handleSearch (e) {
+    console.log('Sending a search request')
+    e.preventDefault()
+    axios.get('http://localhost:4000/user/search')
+      .then((res) => {
+        console.log(res.data)
+      })
   }
 
   render () {
@@ -140,7 +160,15 @@ class App extends Component {
             />
             <Route
               path='/user/search'
-              component={SearchForm}
+              render={(props) => {
+                return (
+                  <SearchForm
+                    {...this.props}
+                    handleSearch={this.handleSearch}
+                    inputHandler={this.inputHandler}
+                  />
+                )
+              }}
             />
             <Route
               path='/'
