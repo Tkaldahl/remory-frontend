@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import MemorySquare from '../MemorySquare/MemorySquare'
+import './Landing.css'
 
 class Landing extends React.Component {
   render () {
@@ -96,18 +97,6 @@ class Landing extends React.Component {
           '5b46316e18429a8c9392b945'
         ],
         'comments': [],
-        '_id': '5b46316e18429a8c9392b94d',
-        'title': 'Anniversary',
-        'postString': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa',
-        'createdAt': '2018-07-11T16:33:50.241Z',
-        'imageURL': '',
-        '__v': 0
-      },
-      {
-        'authorName': [
-          '5b46316e18429a8c9392b945'
-        ],
-        'comments': [],
         '_id': '5b46316e18429a8c9392b94f',
         'title': 'Dinner with the boys',
         'postString': 'Lorem ipsum dolor',
@@ -132,14 +121,16 @@ class Landing extends React.Component {
       memories.push(<MemorySquare memory={sampleMemories[i]} />)
     }
     return (
-      <div className='LandingContainer'>
+      <div className='landingcontainer'>
         <div className='LoginSquare'>
           <Link to='/user/login'>Login!</Link>
         </div>
         <div className='SignupSquare'>
           <Link to='/user/signup'>Sign Up!</Link>
         </div>
-        {memories}
+        <div className='samplecontainer'>
+          {memories}
+        </div>
       </div>
     )
   }
