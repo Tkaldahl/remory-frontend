@@ -1,0 +1,24 @@
+.cardcontainer {
+  position: relative;
+  text-align: center;
+  color: whitesmoke;
+  max-width: 45%;
+  margin: 10px;
+}
+
+.centered {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3em;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  text-shadow: 3px -3px black;
+}
+
+.cardimage {
+  height: 350px;
+  max-width: 100%;
+  border-radius: 20px;
+}
