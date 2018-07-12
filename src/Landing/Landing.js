@@ -122,11 +122,12 @@ class Landing extends React.Component {
     }
     return (
       <div className='landingcontainer'>
-        <div className='LoginSquare'>
-          <Link to='/user/login'>Login!</Link>
-        </div>
-        <div className='SignupSquare'>
-          <Link to='/user/signup'>Sign Up!</Link>
+        <div className='actionsquare'>
+          <h2 className='subheading'>Welcome to Remory!</h2>
+          <Link className='login'to='/user/login'>Login!</Link>
+          <p>Or</p>
+          <Link className='signup' to='/user/signup'>Sign Up!</Link>
+          <h4 className='subheading'>View some sample memories below</h4>
         </div>
         <div className='samplecontainer'>
           {memories}
