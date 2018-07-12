@@ -129,7 +129,7 @@ class App extends Component {
             />
             <Route
               path='/memory/new'
-              render{(props) => {
+              render={(props) => {
                 return (
                   <MemoryForm
                     {...this.props}
