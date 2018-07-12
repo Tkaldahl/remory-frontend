@@ -64,13 +64,13 @@ class SignupForm extends React.Component {
       password: this.state.password,
       profPicture: this.state.profPicture
     }
-    axios.post('https://localhost:4000', {newUser})
+    axios.post('http://localhost:4000/user', {newUser})
       .then(res => {
         console.log(res)
         console.log(res.data)
         // We should have a redirect here after posting.
       }).catch((err) => {
-        console.log(err)
+        console.log(err.response)
       })
   }
   render () {
