@@ -8,13 +8,15 @@ class SignupForm extends React.Component {
       firstName: '',
       lastName: '',
       email: '',
-      password: ''
+      password: '',
+      profPicture: ''
     }
     this.firstNameHandler = this.firstNameHandler.bind(this)
     this.lastNameHandler = this.lastNameHandler.bind(this)
     this.emailHandler = this.emailHandler.bind(this)
     this.passwordHandler = this.passwordHandler.bind(this)
     this.submitHandler = this.submitHandler.bind(this)
+    this.profPictureHandler = this.profPictureHandler.bind(this)
   }
 
   firstNameHandler (e) {
@@ -45,6 +47,13 @@ class SignupForm extends React.Component {
     console.log(this.state.password)
   }
 
+  profPictureHandler (e) {
+    this.setState({
+      profPicture: e.target.value
+    })
+    console.log(this.state.profPicture)
+  }
+
   submitHandler (e) {
     e.preventDefault()
     console.log('clicked')
@@ -52,7 +61,8 @@ class SignupForm extends React.Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      profPicture: this.state.profPicture
     }
     axios.post('https://remory-api.herokuapp.com', {newUser})
       .then(res => {
@@ -71,6 +81,7 @@ class SignupForm extends React.Component {
           <input type='text' placeholder='Last Name' onChange={this.lastNameHandler} />
           <input type='text' placeholder='Email' onChange={this.emailHandler} />
           <input type='text' placeholder='Password' onChange={this.passwordHandler} />
+          <input type='text' placeholder='Upload A Profile Picture' onChange={this.profPictureHandler} />
           <input type='submit' className='submitButton JS' onClick={this.submitHandler} />
         </form>
       </div>
