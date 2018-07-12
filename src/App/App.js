@@ -24,14 +24,15 @@ class App extends Component {
       lastName: '',
       profPicture: '',
       isLoggedIn: false,
-      loggedInUser: ''
+      loggedInUser: '',
+      searchedUser: ''
     }
     this.inputHandler = this.inputHandler.bind(this)
     this.handleSignup = this.handleSignup.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
-    // this.handleClick = this.handleClick.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount () {
@@ -124,8 +125,14 @@ class App extends Component {
       email: this.state.email
     }).then((res) => {
       console.log(res.data._id)
+      this.setState = ({
+        searchedUser: res.data._id
+      })
     })
   }
+  handleClick = () => {
+    this.history.push('/')
+}
 
   render () {
     return (
@@ -179,10 +186,9 @@ class App extends Component {
                 return (
                   <SearchForm
                     {...routerParams}
-                    // {...this.props}
+                    {...this.props}
                     handleSearch={this.handleSearch}
                     inputHandler={this.inputHandler}
-                    handleClick={this.handleClick}
                   />
                 )
               }}
