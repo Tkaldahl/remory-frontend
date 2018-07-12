@@ -12,6 +12,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 3em;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
   text-shadow: 3px -3px black;
 }
 
