@@ -129,7 +129,14 @@ class App extends Component {
             />
             <Route
               path='/memory/new'
-              component={MemoryForm}
+              render{(props) => {
+                return (
+                  <MemoryForm
+                    {...this.props}
+                    inputHandler={this.inputHandler}
+                  />
+                )
+              }}
             />
             <Route
               path='/user/search'
