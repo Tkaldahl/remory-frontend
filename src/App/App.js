@@ -30,6 +30,7 @@ class App extends Component {
     this.handleLogout = this.handleLogout.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    // this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount () {
@@ -110,10 +111,7 @@ class App extends Component {
       email: this.state.email
     }).then((res) => {
       console.log(res.data._id)
-    }).then((res) => {
-      this.props.history.push(`/user/${res.data._id}`)
-    }
-    )
+    })
   }
 
   render () {
@@ -164,12 +162,14 @@ class App extends Component {
             />
             <Route
               path='/user/search'
-              render={(props) => {
+              render={(routerParams) => {
                 return (
                   <SearchForm
-                    {...this.props}
+                    {...routerParams}
+                    // {...this.props}
                     handleSearch={this.handleSearch}
                     inputHandler={this.inputHandler}
+                    handleClick={this.handleClick}
                   />
                 )
               }}
@@ -184,7 +184,6 @@ class App extends Component {
                   return <Landing />
                 }
               }}
-            />
             />
             <Route
               path='/memory/:id'
