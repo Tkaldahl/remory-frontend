@@ -1,0 +1,40 @@
+.samplecontainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2%;
+}
+
+.landingcontainer {
+  height: 850px;
+  overflow-y: scroll;
+  background: #8C7284;
+}
+
+.subheading {
+  font-size: 4em;
+  color: rgb(27, 4, 21);
+  font-family: 'Sacramento', cursive;
+  font-weight: 300;
+  margin: 10px;
+}
+
+.actionsquare {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-decoration: none;
+  padding: 20px;
+}
+
+.login, .signup {
+  text-decoration: none;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+  font-size: 2em;
+  color: rgb(27, 4, 21);
+  margin-bottom: 20px;
+}

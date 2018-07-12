@@ -6,7 +6,7 @@ class Header extends React.Component {
     return (
       <div className='header'>
         <h1 className='sitetitle'>Remory</h1>
-        <img className='logo' src='#' alt='Remory Logo' /> {/* Add in this image source once we've picked our logo */}
+        <img src='' className='logo' alt='Remory Logo' /> {/* Add in this image source once we've picked our logo */}
       </div>
     )
   }
