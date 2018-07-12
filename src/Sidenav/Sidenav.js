@@ -12,7 +12,9 @@ class SideNav extends React.Component {
         <Link className='navbarlink' to='/'>Home</Link>
         <Link className='navbarlink' to='/memory/new'>Add Memory</Link>
         <Link className='navbarlink' to='/user/search'>Search</Link>
-        <Link className='navbarlink' to='#'>Logout</Link> {/* This piece requires authentication to be up and running. I believe the best way to do this is to call a function on the Link which will destroy the session and logout the user. This page is useful. https://stackoverflow.com/questions/34720034/how-to-handle-logout-route-in-redux */}
+        <form>
+          <input type='submit' onClick={this.props.handleLogout} />
+        </form>
       </div>
     )
   }
