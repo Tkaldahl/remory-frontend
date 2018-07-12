@@ -109,8 +109,11 @@ class App extends Component {
     axios.post('http://localhost:4000/user/search', {
       email: this.state.email
     }).then((res) => {
-      console.log(res.data)
-    })
+      console.log(res.data._id)
+    }).then((res) => {
+      this.props.history.push(`/user/${res.data._id}`)
+    }
+    )
   }
 
   render () {
