@@ -24,7 +24,7 @@ class App extends Component {
       lastName: '',
       profPicture: '',
       isLoggedIn: false,
-      loggedInUser: ''
+      displayedUser: ''
     }
     this.inputHandler = this.inputHandler.bind(this)
     this.handleSignup = this.handleSignup.bind(this)
@@ -62,7 +62,6 @@ class App extends Component {
 
   handleSignup (e) {
     e.preventDefault()
-    console.log('submit clicked')
     axios.post('http://localhost:4000/user/signup', {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -98,9 +97,9 @@ class App extends Component {
         var loggedInUser = this.jwtDecode(localStorage.token)
         this.setState({
           isLoggedIn: true,
-          loggedInUser: loggedInUser
+          displayedUser: loggedInUser
         })
-        console.log(this.state.loggedInUser)
+        console.log(this.state.displayedUser)
       })
       .catch(err => console.log(err))
   }
@@ -151,9 +150,16 @@ class App extends Component {
             <Route
               path='/'
               render={(props) => {
+                console.log(this.state.displayedUser)
                 // const isLoggedIn = this.state.isLoggedIn
                 if (this.state.isLoggedIn) {
-                  return <MemoryContainer />
+                  return (
+                    <MemoryContainer
+                      {...this.props}
+                      {...this.routerParams}
+                      displayedUser={this.state.displayedUser}
+                    />
+                  )
                 } else {
                   return <Landing />
                 }
