@@ -106,10 +106,8 @@ class App extends Component {
   handleSearch (e) {
     console.log('Sending a search request')
     e.preventDefault()
-    axios.get('http://localhost:4000/user/search', {
-      params: {
-        email: this.state.email
-      }
+    axios.post('http://localhost:4000/user/search', {
+      email: this.state.email
     }).then((res) => {
       console.log(res.data)
     })
