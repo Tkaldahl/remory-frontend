@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Steps: Isaiah Back end, Dan on the front end, CRUD without authentication
 class SearchForm extends React.Component {
   render () {
     return (
