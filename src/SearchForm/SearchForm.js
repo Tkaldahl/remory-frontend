@@ -4,7 +4,7 @@ import React from 'react'
 class SearchForm extends React.Component {
   render () {
     return (
-      <div class='formcontainer'>
+      <div className='formcontainer'>
         <h2 className='subheading'>Search Remory</h2>
 
         <form className='form'>
