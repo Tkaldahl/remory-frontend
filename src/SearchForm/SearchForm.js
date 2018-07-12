@@ -8,8 +8,8 @@ class SearchForm extends React.Component {
         <h2 className='subheading'>Search Remory</h2>
 
         <form className='form'>
-          <input type='text' placeholder='Search for a User...' />
-          <input type='button' value='Search' />
+          <input className='email' type='text' placeholder='Search for a User...' onChange={this.props.inputHandler} />
+          <input type='button' value='Search' onClick={this.props.handleSearch} />
         </form>
       </div>
     )
