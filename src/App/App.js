@@ -12,6 +12,7 @@ import MemoryForm from '../MemoryForm/MemoryForm'
 import SearchForm from '../SearchForm/SearchForm'
 import LoginForm from '../LoginForm/LoginForm'
 import SignUpForm from '../SignupForm/SignupForm'
+import UpdateForm from '../UpdateForm/UpdateForm'
 
 class App extends Component {
   constructor () {
