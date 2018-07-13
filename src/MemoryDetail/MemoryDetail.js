@@ -1,6 +1,7 @@
 import React from 'react'
 import CommentForm from '../CommentForm/CommentForm'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import './MemoryDetail.css'
 
 // Notes: This component will receive props from App.js. MemorySquare should have an event listener which 'hears' that it's been clicked, sets the state of App.js to select a specific memory, and then App.js passes that memoryId to memoryDetail as a prop.
@@ -56,12 +57,15 @@ class MemoryDetail extends React.Component {
         <p className='detailtext'>{post}</p>
         <p className='detailinfo'>This memory was recorded by {name} on {date}</p>
         {/* <CommentForm comments={comments} memoryID={this.props.id} /> */}
-        <input className='deletebutton' type='submit' value='Delete Memory' onClick={this.deleteMemory} />
+        <Link to='/memory/update' className='updatelink' />
+        <input className='button' type='submit' value='Delete Memory' onClick={this.deleteMemory} />
       </div>
     )
   }
   deleteMemory () {
-    axios.delete('https://remory-backend.herokuapp.com/memory/:id', {
+    console.log('Memory was deleted')
+    console.log(this.state.id)
+    axios.delete('https://localhost4000/memory/:id', {
       id: this.state.id
     })
   }
