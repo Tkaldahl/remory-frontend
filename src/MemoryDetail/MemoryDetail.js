@@ -24,6 +24,7 @@ class MemoryDetail extends React.Component {
 
   componentDidMount () {
     console.log('MemoryDetail component DidMount: GET at API for memory')
+    console.log(`${this.props.originURL}/memory/${this.props.id}`)
     axios.get(`${this.props.originURL}/memory/${this.props.id}`)
       .then((res) => {
         console.log(res)
