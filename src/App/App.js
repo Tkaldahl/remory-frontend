@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 import Header from '../Header/Header'
@@ -24,16 +24,22 @@ class App extends Component {
       lastName: '',
       profPicture: '',
       isLoggedIn: false,
-      displayedUser: ''
+      displayedUser: '',
+      searchedUser: '',
+      redirect: false
     }
     this.inputHandler = this.inputHandler.bind(this)
     this.handleSignup = this.handleSignup.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+    this.redirectHome = this.redirectHome.bind(this)
   }
 
   componentDidMount () {
     console.log(localStorage.token)
+    console.log('searched user =', this.state.searchedUser)
+    console.log(this.state.displayedUser)
     if (localStorage.token) {
       this.setState({
         isLoggedIn: true
@@ -50,6 +56,16 @@ class App extends Component {
       [e.target.className]: e.target.value
     })
   }
+
+  // stateChange = (e) => {
+  //   // making React state respond to each user form change, resulting in "single source of truth"
+  //   console.log('Submit form: stateChange()')
+  //   const keyValue = e.target.value
+  //   const keyName = e.target.name
+  //   this.setState({ notification:'...done with that quote yet?'})
+  //   this.setState({
+  //         [keyName]: keyValue
+  //       })
 
   handleLogout () {
     this.setState({
@@ -105,6 +121,29 @@ class App extends Component {
       .catch(err => console.log(err))
   }
 
+  handleSearch (e) {
+    e.preventDefault()
+    axios.post('http://localhost:4000/user/search', {
+      email: this.state.email
+    })
+      .then(response => {
+        this.setState({
+          searchedUser: response.data._id
+        })
+        this.redirectHome()
+      })
+  }
+
+  redirectHome () {
+    console.log('redirectHome firing')
+    // console.log(this.props)
+    this.setState({
+      redirect: true
+    })
+    console.log(this.state.searchedUser)
+    // this.props.history.push('/')
+  }
+
   render () {
     return (
       <div className='AppContainer'>
@@ -142,34 +181,58 @@ class App extends Component {
             />
             <Route
               path='/memory/new'
-              component={MemoryForm}
+              render={(props) => {
+                return (
+                  <MemoryForm
+                    {...this.props}
+                    inputHandler={this.inputHandler}
+                    displayedUser={this.state.displayedUser}
+                  />
+                )
+              }}
             />
             <Route
               path='/user/search'
-              component={SearchForm}
+              render={props => {
+                return (
+                  <SearchForm
+                    // {...routerParams}
+                    // {...props}
+                    handleSearch={this.handleSearch}
+                    inputHandler={this.inputHandler}
+                    redirect={this.state.redirect}
+                  />
+                )
+              }}
             />
             <Route
               path='/'
               render={(props) => {
                 console.log(this.state.displayedUser)
                 // const isLoggedIn = this.state.isLoggedIn
-                if (this.state.isLoggedIn) {
-                  return (
-                    <MemoryContainer
-                      {...this.props}
-                      {...this.routerParams}
-                      displayedUser={this.state.displayedUser}
-                    />
-                  )
-                } else {
+                if (this.state.isLoggedIn || this.state.searchedUser) {
+                  return <MemoryContainer
+                    {...this.props}
+                    {...this.routerParams}
+                    displayedUser={this.state.displayedUser}
+                    searchedUser={this.state.searchedUser}
+                  />
+               } else {
                   return <Landing />
                 }
               }}
             />
-            />
             <Route
               path='/memory/:id'
-              component={MemoryDetail}
+              render={props => {
+                return <MemoryDetail
+                  // {...routerParams}
+                  {...props.match.params}
+                  handleSearch={this.handleSearch}
+                  inputHandler={this.inputHandler}
+                  redirect={this.state.redirect}
+                />
+              }}
             />
           </Switch>
         </main>

@@ -4,3 +4,6 @@ const colorScheme = [
   '9B9FB5', // cadet grey
   '8C7284', // rocket metallic
   '7A6174'] // old lavender
+
+const localroot = ''
+const api = ''

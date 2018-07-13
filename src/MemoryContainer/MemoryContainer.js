@@ -19,19 +19,47 @@ class MemoryContainer extends React.Component {
     // } else {
     //   origin = 'http://remory-api.herokuapp.com/'
     // }
-    axios.post(`http://localhost:4000/memory/search`, {id: this.props.displayedUser})
-      .then((res) => {
+    if (this.props.searchedUser) {
+      axios.post(`http://localhost:4000/memory/search`, {id: this.props.searchedUser})
+        .then((res) => {
         // console.log(origin)
-        console.log(res)
-        this.setState({
-          memories: res.data
+          console.log(res)
+          this.setState({
+            memories: res.data
+          })
+          console.log(this.props.displayedUser)
         })
-        console.log(this.state.user)
-        console.log(this.props.displayedUser)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
+      axios.post(`http://localhost:4000/memory/search`, {id: this.props.displayedUser})
+        .then((res) => {
+        // console.log(origin)
+          console.log(res)
+          this.setState({
+            memories: res.data
+          })
+          console.log(this.props.displayedUser)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+    // else {
+    //   axios.post(`http://localhost:4000/memory/search`, {id: '5b466ba172457d31dbb38ad5'})
+    //     .then((res) => {
+    //     // console.log(origin)
+    //       console.log(res)
+    //       this.setState({
+    //         memories: res.data
+    //       })
+    //       console.log(this.props.displayedUser)
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // }
   }
 
   render () {
