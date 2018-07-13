@@ -125,14 +125,6 @@ class App extends Component {
     e.preventDefault()
     axios.post('http://localhost:4000/user/search', {
       email: this.state.email
-<<<<<<< HEAD
-    }).then((res) => {
-      console.log(res.data._id)
-    }).then((res) => {
-      // this.props.history.push(`/user/${res.data._id}`)
-    }
-    )
-=======
     })
       .then(response => {
         this.setState({
@@ -150,7 +142,6 @@ class App extends Component {
     })
     console.log(this.state.searchedUser)
     // this.props.history.push('/')
->>>>>>> 41d6c2826d97a0699c1b46dd2817010dc71c31b9
   }
 
   render () {
@@ -231,7 +222,15 @@ class App extends Component {
             />
             <Route
               path='/memory/:id'
-              component={MemoryDetail}
+              render={props => {
+                return <MemoryDetail
+                  // {...routerParams}
+                  {...props.match.params}
+                  handleSearch={this.handleSearch}
+                  inputHandler={this.inputHandler}
+                  redirect={this.state.redirect}
+                />
+              }}
             />
           </Switch>
         </main>
