@@ -71,6 +71,7 @@ class App extends Component {
     this.setState({
       email: '',
       password: '',
+      displayedUser: '',
       isLoggedIn: false
     })
     localStorage.clear()
@@ -78,7 +79,6 @@ class App extends Component {
 
   handleSignup (e) {
     e.preventDefault()
-    console.log('submit clicked')
     axios.post('http://localhost:4000/user/signup', {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -208,6 +208,7 @@ class App extends Component {
             <Route
               path='/'
               render={(props) => {
+                console.log(this.state.displayedUser)
                 // const isLoggedIn = this.state.isLoggedIn
                 if (this.state.isLoggedIn || this.state.searchedUser) {
                   return <MemoryContainer
@@ -216,7 +217,7 @@ class App extends Component {
                     displayedUser={this.state.displayedUser}
                     searchedUser={this.state.searchedUser}
                   />
-                } else {
+               } else {
                   return <Landing />
                 }
               }}
