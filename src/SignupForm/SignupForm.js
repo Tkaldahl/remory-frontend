@@ -9,7 +9,7 @@ class SignupForm extends React.Component {
           <input type='text' className='firstName' placeholder='First Name' onChange={this.props.inputHandler} />
           <input type='text' className='lastName' placeholder='Last Name' onChange={this.props.inputHandler} />
           <input type='text' className='email' placeholder='Email' onChange={this.props.inputHandler} />
-          <input type='text' className='password' placeholder='Password' onChange={this.props.inputHandler} />
+          <input type='password' className='password' placeholder='Password' onChange={this.props.inputHandler} />
           <input type='text' className='profPicture' placeholder='Upload A Profile Picture' onChange={this.props.inputHandler} />
           <input type='submit' className='submitButton JS' onClick={this.props.handleSignup} />
         </form>
