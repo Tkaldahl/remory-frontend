@@ -1,0 +1,24 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2em;
+  background: #D1B1C8;
+  width: 15%;
+  float: right;
+  height: 811px;
+}
+
+.navbarlink {
+  text-align: center;
+  padding: 10%;
+  font-size: 1.5em;
+  font-family: 'Roboto Slab', serif;
+  text-decoration: none;
+  color: #7A6174;
+  width: 100%;
+}
+
+.navbarlink:hover {
+  background: rgba(85, 67, 81, 0.308);
+}

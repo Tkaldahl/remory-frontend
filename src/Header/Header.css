@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+  background: #B1B7D1;
+  font-family: 'Sacramento', cursive;
+  margin: 0;
+  padding: 0;
+}
+
+.sitetitle {
+  margin: 1% 2%;
+  font-size: 4em;
+  color: #7A6174;
+}
+
+.logo {
+  height: 40%;
+}
