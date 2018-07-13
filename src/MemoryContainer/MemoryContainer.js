@@ -21,7 +21,7 @@ class MemoryContainer extends React.Component {
     //   origin = 'http://remory-api.herokuapp.com/'
     // }
     if (this.props.searchedUser) {
-      axios.post(`${this.props.originURL}/memory/search`, {id: this.props.searchedUser})
+      axios.post(`https://remory-backend.herokuapp.com/memory/search`, {id: this.props.searchedUser})
         .then((res) => {
         // console.log(origin)
           console.log(res)

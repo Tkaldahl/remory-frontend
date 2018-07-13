@@ -27,7 +27,7 @@ class App extends Component {
       displayedUser: '',
       searchedUser: '',
       redirect: false,
-      originURL: 'https://remory-backend.herokuapp.com'
+      // originURL: 'https://remory-backend.herokuapp.com'
     }
     this.inputHandler = this.inputHandler.bind(this)
     this.handleSignup = this.handleSignup.bind(this)
@@ -52,11 +52,11 @@ class App extends Component {
   }
 
   componentDidMount () {
-    if (window.location.origin === 'http://localhost:3000') {
-      this.setState({ originURL: 'http://localhost:4000' })
-      this.checkLocalStorageToken()
-      return
-    }
+    // if (window.location.origin === 'http://localhost:3000') {
+    //   this.setState({ originURL: 'http://localhost:4000' })
+    //   this.checkLocalStorageToken()
+    //   return
+    // }
     this.checkLocalStorageToken()
   }
 
@@ -88,7 +88,7 @@ class App extends Component {
 
   handleSignup (e) {
     e.preventDefault()
-    axios.post(`${this.state.originURL}/user/signup`, {
+    axios.post(`https://remory-backend.herokuapp.com/user/signup`, {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
@@ -114,7 +114,7 @@ class App extends Component {
 
   handleLogin (e) {
     e.preventDefault()
-    axios.post(`${this.state.originURL}/user/login`, {
+    axios.post(`https://remory-backend.herokuapp.com/user/login`, {
       email: this.state.email,
       password: this.state.password
     })
@@ -132,7 +132,7 @@ class App extends Component {
 
   handleSearch (e) {
     e.preventDefault()
-    axios.post(`${this.state.originURL}/user/search`, {
+    axios.post(`https://remory-backend.herokuapp.com/user/search`, {
       email: this.state.email
     })
       .then(response => {
@@ -176,7 +176,7 @@ class App extends Component {
                     {...this.routerParams}
                     displayedUser={this.state.displayedUser}
                     searchedUser={this.state.searchedUser}
-                    originURL={this.state.originURL}
+                    // originURL={this.state.originURL}
                   />
                 } else {
                   return <Landing />
@@ -206,7 +206,7 @@ class App extends Component {
                   handleSearch={this.handleSearch}
                   inputHandler={this.inputHandler}
                   redirect={this.state.redirect}
-                  originURL={this.state.originURL}
+                  // originURL={this.state.originURL}
                 />
               }}
             />
@@ -231,7 +231,7 @@ class App extends Component {
                     handleSignup={this.handleSignup}
                     inputHandler={this.inputHandler}
                     displayedUser={this.state.displayedUser}
-                    originURL={this.state.originURL}
+                    // originURL={this.state.originURL}
                   />
                 )
               }}

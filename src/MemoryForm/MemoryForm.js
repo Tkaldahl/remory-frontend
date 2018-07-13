@@ -63,7 +63,7 @@ class MemoryForm extends React.Component {
   createMemory (e) {
     e.preventDefault()
     console.log('AXIOS POST CREATEMEMORY()')
-    axios.post(`${this.props.originURL}/memory`, {
+    axios.post(`https://remory-backend.herokuapp.com/memory`, {
       titleString: this.state.titleString,
       imageURL: this.state.imageURL,
       postString: this.state.postString,
