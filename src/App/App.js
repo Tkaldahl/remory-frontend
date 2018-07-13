@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 import Header from '../Header/Header'
@@ -23,17 +23,23 @@ class App extends Component {
       firstName: '',
       lastName: '',
       profPicture: '',
-      isLoggedIn: false
+      isLoggedIn: false,
+      displayedUser: '',
+      searchedUser: '',
+      redirect: false
     }
     this.inputHandler = this.inputHandler.bind(this)
     this.handleSignup = this.handleSignup.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.redirectHome = this.redirectHome.bind(this)
   }
 
   componentDidMount () {
     console.log(localStorage.token)
+    console.log('searched user =', this.state.searchedUser)
+    console.log(this.state.displayedUser)
     if (localStorage.token) {
       this.setState({
         isLoggedIn: true
@@ -87,33 +93,64 @@ class App extends Component {
       .catch(err => console.log(err))
   }
 
+  // This function parses the payload so that we can save the logged in user's id into state
+  jwtDecode (t) {
+    let token = {}
+    token.raw = t
+    // token.header = JSON.parse(window.atob(t.split('.')[0]))
+    token.payload = JSON.parse(window.atob(t.split('.')[1]))
+    // console.log(token.payload.id)
+    return (token.payload.id)
+  }
+
   handleLogin (e) {
     e.preventDefault()
-    console.log(this.state.email, this.state.password)
     axios.post('http://localhost:4000/user/login', {
       email: this.state.email,
       password: this.state.password
     })
       .then(response => {
-        console.log('login firing')
         localStorage.token = response.data.token
-        this.setState({isLoggedIn: true})
-        console.log(this.state.isLoggedIn)
+        var loggedInUser = this.jwtDecode(localStorage.token)
+        this.setState({
+          isLoggedIn: true,
+          displayedUser: loggedInUser
+        })
+        console.log(this.state.displayedUser)
       })
       .catch(err => console.log(err))
   }
 
   handleSearch (e) {
-    console.log('Sending a search request')
     e.preventDefault()
     axios.post('http://localhost:4000/user/search', {
       email: this.state.email
+<<<<<<< HEAD
     }).then((res) => {
       console.log(res.data._id)
     }).then((res) => {
       // this.props.history.push(`/user/${res.data._id}`)
     }
     )
+=======
+    })
+      .then(response => {
+        this.setState({
+          searchedUser: response.data._id
+        })
+        this.redirectHome()
+      })
+  }
+
+  redirectHome () {
+    console.log('redirectHome firing')
+    // console.log(this.props)
+    this.setState({
+      redirect: true
+    })
+    console.log(this.state.searchedUser)
+    // this.props.history.push('/')
+>>>>>>> 41d6c2826d97a0699c1b46dd2817010dc71c31b9
   }
 
   render () {
@@ -164,12 +201,14 @@ class App extends Component {
             />
             <Route
               path='/user/search'
-              render={(props) => {
+              render={props => {
                 return (
                   <SearchForm
-                    {...this.props}
+                    // {...routerParams}
+                    // {...props}
                     handleSearch={this.handleSearch}
                     inputHandler={this.inputHandler}
+                    redirect={this.state.redirect}
                   />
                 )
               }}
@@ -178,13 +217,17 @@ class App extends Component {
               path='/'
               render={(props) => {
                 // const isLoggedIn = this.state.isLoggedIn
-                if (this.state.isLoggedIn) {
-                  return <MemoryContainer />
+                if (this.state.isLoggedIn || this.state.searchedUser) {
+                  return <MemoryContainer
+                    {...this.props}
+                    {...this.routerParams}
+                    displayedUser={this.state.displayedUser}
+                    searchedUser={this.state.searchedUser}
+                  />
                 } else {
                   return <Landing />
                 }
               }}
-            />
             />
             <Route
               path='/memory/:id'

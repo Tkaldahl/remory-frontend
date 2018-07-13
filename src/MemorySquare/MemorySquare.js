@@ -6,8 +6,10 @@ class MemorySquare extends React.Component {
   render () {
     return (
       <div className='card cardcontainer'>
-        <h3 className='centered'>{this.props.memory.title}</h3>
-        <Link to={`/memory/${this.props.memory._id}`}><img className='cardimage' src={this.props.memory.imageURL} /></Link>
+        <h3>{this.props.memory.titleString}</h3>
+        <img src={this.props.memory.imageURL} />
+        {/* <h3 className='centered'>{this.props.memory.title}</h3>
+        <Link to={`/memory/${this.props.memory._id}`}><img className='cardimage' src={this.props.memory.imageURL} /></Link> */}
       </div>
     )
   }
