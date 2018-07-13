@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import './MemoryForm.css'
 
-
 class MemoryForm extends React.Component {
   constructor () {
     super()
@@ -64,7 +63,7 @@ class MemoryForm extends React.Component {
   createMemory (e) {
     e.preventDefault()
     console.log('AXIOS POST CREATEMEMORY()')
-    axios.post('https://remory-backend.herokuapp.com/memory', {
+    axios.post(`${this.props.originURL}/memory`, {
       titleString: this.state.titleString,
       imageURL: this.state.imageURL,
       postString: this.state.postString,
