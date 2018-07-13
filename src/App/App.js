@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 import Header from '../Header/Header'
@@ -25,18 +25,21 @@ class App extends Component {
       profPicture: '',
       isLoggedIn: false,
       displayedUser: '',
-      searchedUser: ''
+      searchedUser: '',
+      redirect: false
     }
     this.inputHandler = this.inputHandler.bind(this)
     this.handleSignup = this.handleSignup.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.redirectHome = this.redirectHome.bind(this)
   }
 
   componentDidMount () {
     console.log(localStorage.token)
+    console.log('searched user =', this.state.searchedUser)
+    console.log(this.state.displayedUser)
     if (localStorage.token) {
       this.setState({
         isLoggedIn: true
@@ -113,26 +116,33 @@ class App extends Component {
           isLoggedIn: true,
           displayedUser: loggedInUser
         })
-        console.log(this.state.loggedInUser)
+        console.log(this.state.displayedUser)
       })
       .catch(err => console.log(err))
   }
 
   handleSearch (e) {
-    console.log('Sending a search request')
     e.preventDefault()
     axios.post('http://localhost:4000/user/search', {
       email: this.state.email
-    }).then((res) => {
-      console.log(res.data._id)
-      this.setState = ({
-        searchedUser: res.data._id
-      })
     })
+      .then(response => {
+        this.setState({
+          searchedUser: response.data._id
+        })
+        this.redirectHome()
+      })
   }
-  handleClick = () => {
-    this.history.push('/')
-}
+
+  redirectHome () {
+    console.log('redirectHome firing')
+    // console.log(this.props)
+    this.setState({
+      redirect: true
+    })
+    console.log(this.state.searchedUser)
+    // this.props.history.push('/')
+  }
 
   render () {
     return (
@@ -182,13 +192,14 @@ class App extends Component {
             />
             <Route
               path='/user/search'
-              render={(routerParams) => {
+              render={props => {
                 return (
                   <SearchForm
-                    {...routerParams}
-                    {...this.props}
+                    // {...routerParams}
+                    // {...props}
                     handleSearch={this.handleSearch}
                     inputHandler={this.inputHandler}
+                    redirect={this.state.redirect}
                   />
                 )
               }}
@@ -197,11 +208,12 @@ class App extends Component {
               path='/'
               render={(props) => {
                 // const isLoggedIn = this.state.isLoggedIn
-                if (this.state.isLoggedIn) {
-                  return <MemoryContainer 
-                  {...this.props}
-                  {...this.routerParams}
-                  displayedUser={this.state.displayedUser}
+                if (this.state.isLoggedIn || this.state.searchedUser) {
+                  return <MemoryContainer
+                    {...this.props}
+                    {...this.routerParams}
+                    displayedUser={this.state.displayedUser}
+                    searchedUser={this.state.searchedUser}
                   />
                 } else {
                   return <Landing />
