@@ -28,7 +28,7 @@ class MemoryForm extends React.Component {
           <input className='inputfield' type='text' placeholder='Title?' onChange={this.setTitle} />
           <input className='inputfield' type='text' placeholder='Image Url?' onChange={this.setImage} />
           <textarea className='inputfield' rows='8' cols='50' placeholder='Memory Details...' onChange={this.setDetails} />
-          <input className='inputfield' type='text' placeholder='Author Email?' onChange={this.setEmail} />
+          {/* <input className='inputfield' type='text' placeholder='Author Email?' onChange={this.setEmail} /> */}
           <input type='button' value='Create Memory' onClick={this.onClick} />
         </form>
       </div>
@@ -68,7 +68,7 @@ class MemoryForm extends React.Component {
       titleString: this.state.titleString,
       imageURL: this.state.imageURL,
       postString: this.state.postString,
-      authorEmail: this.state.authorEmail
+      displayedUser: this.props.displayedUser
     })
       .then((res) => {
         console.log(res.data)

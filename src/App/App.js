@@ -186,6 +186,7 @@ class App extends Component {
                   <MemoryForm
                     {...this.props}
                     inputHandler={this.inputHandler}
+                    displayedUser={this.state.displayedUser}
                   />
                 )
               }}
