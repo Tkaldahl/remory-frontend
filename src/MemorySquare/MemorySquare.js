@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import MemoryDetail from '../MemoryDetail/MemoryDetail'
+import { Link, Redirect, Route } from 'react-router-dom'
 import './MemorySquare.css'
 
 class MemorySquare extends React.Component {
@@ -7,7 +8,7 @@ class MemorySquare extends React.Component {
     return (
       <div className='card cardcontainer'>
         <h3 className='centered'>{this.props.memory.titleString}</h3>
-        <Link to={`/memory/${this.props.memory._id}`}> <img className='cardimage' src={this.props.memory.imageURL} /> </Link>
+        <Link to={`/memory/${this.props.memory._id}`}> <img className='cardimage' src={this.props.memory.imageURL} onClick={this.redirect} /> </Link>
       </div>
     )
   }
