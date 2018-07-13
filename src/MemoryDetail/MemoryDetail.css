@@ -1,0 +1,28 @@
+.detailcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.memoryimage {
+  max-width: 60%;
+  border-radius: 20px;
+  margin-top: 2%;
+}
+
+.detailtitle {
+  font-family: 'Sacramento', cursive;
+  font-size: 3.5em;
+}
+
+.detailtext {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.5em;
+  text-align: center;
+  width: 80%;
+}
+
+.detailinfo {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+}
