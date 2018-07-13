@@ -5,7 +5,9 @@ class UpdateForm extends Component {
   render () {
     return (
       <div>
-        <h3>Hello Update</h3>
+        <form>
+          <input type='text' placeholder='Update Memory Details..' />
+        </form>
       </div>
     )
   }
