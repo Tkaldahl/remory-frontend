@@ -186,6 +186,7 @@ class App extends Component {
                   <MemoryForm
                     {...this.props}
                     inputHandler={this.inputHandler}
+                    displayedUser={this.state.displayedUser}
                   />
                 )
               }}
@@ -222,7 +223,15 @@ class App extends Component {
             />
             <Route
               path='/memory/:id'
-              component={MemoryDetail}
+              render={props => {
+                return <MemoryDetail
+                  // {...routerParams}
+                  {...props.match.params}
+                  handleSearch={this.handleSearch}
+                  inputHandler={this.inputHandler}
+                  redirect={this.state.redirect}
+                />
+              }}
             />
           </Switch>
         </main>
