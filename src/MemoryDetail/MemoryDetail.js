@@ -28,6 +28,7 @@ class MemoryDetail extends React.Component {
       .then((res) => {
         console.log(res)
         this.setState({
+          id: res.data._id,
           titleString: res.data.titleString,
           authorName: res.data.authorName[0].firstName,
           postString: res.data.postString,
@@ -60,7 +61,9 @@ class MemoryDetail extends React.Component {
     )
   }
   deleteMemory () {
-    console.log('Memory was deleted')
+    axios.delete('http://localhost:4000/user/signup', {
+      id: this.state.id
+    })
   }
 }
 
