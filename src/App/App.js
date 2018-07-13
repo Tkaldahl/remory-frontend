@@ -206,6 +206,7 @@ class App extends Component {
                   handleSearch={this.handleSearch}
                   inputHandler={this.inputHandler}
                   redirect={this.state.redirect}
+                  originURL={this.state.originURL}
                 />
               }}
             />
