@@ -156,6 +156,50 @@ class App extends Component {
         <main>
           <Switch>
             <Route
+              path='/'
+              exact
+              render={(props) => {
+                console.log(this.state.displayedUser)
+                // const isLoggedIn = this.state.isLoggedIn
+                if (this.state.isLoggedIn || this.state.searchedUser) {
+                  return <MemoryContainer
+                    {...this.props}
+                    {...this.routerParams}
+                    displayedUser={this.state.displayedUser}
+                    searchedUser={this.state.searchedUser}
+                  />
+                } else {
+                  return <Landing />
+                }
+              }}
+            />
+            <Route
+              path='/memory/new'
+              exact
+              render={(props) => {
+                return (
+                  <MemoryForm
+                    {...this.props}
+                    inputHandler={this.inputHandler}
+                    displayedUser={this.state.displayedUser}
+                  />
+                )
+              }}
+            />
+            <Route
+              path='/memory/:id'
+              render={props => {
+                console.log('path works')
+                return <MemoryDetail
+                  // {...routerParams}
+                  {...props.match.params}
+                  handleSearch={this.handleSearch}
+                  inputHandler={this.inputHandler}
+                  redirect={this.state.redirect}
+                />
+              }}
+            />
+            <Route
               path='/user/login'
               render={(props) => {
                 return (
@@ -180,18 +224,6 @@ class App extends Component {
               }}
             />
             <Route
-              path='/memory/new'
-              render={(props) => {
-                return (
-                  <MemoryForm
-                    {...this.props}
-                    inputHandler={this.inputHandler}
-                    displayedUser={this.state.displayedUser}
-                  />
-                )
-              }}
-            />
-            <Route
               path='/user/search'
               render={props => {
                 return (
@@ -203,35 +235,6 @@ class App extends Component {
                     redirect={this.state.redirect}
                   />
                 )
-              }}
-            />
-            <Route
-              path='/'
-              render={(props) => {
-                console.log(this.state.displayedUser)
-                // const isLoggedIn = this.state.isLoggedIn
-                if (this.state.isLoggedIn || this.state.searchedUser) {
-                  return <MemoryContainer
-                    {...this.props}
-                    {...this.routerParams}
-                    displayedUser={this.state.displayedUser}
-                    searchedUser={this.state.searchedUser}
-                  />
-               } else {
-                  return <Landing />
-                }
-              }}
-            />
-            <Route
-              path='/memory/:id'
-              render={props => {
-                return <MemoryDetail
-                  // {...routerParams}
-                  {...props.match.params}
-                  handleSearch={this.handleSearch}
-                  inputHandler={this.inputHandler}
-                  redirect={this.state.redirect}
-                />
               }}
             />
           </Switch>

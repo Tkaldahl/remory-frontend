@@ -1,6 +1,7 @@
 import React from 'react'
 import MemorySquare from '../MemorySquare/MemorySquare'
-import { Link } from 'react-router-dom'
+import MemoryDetail from '../MemoryDetail/MemoryDetail'
+import { Link, Route } from 'react-router-dom'
 import axios from 'axios'
 
 // This component will receive the authenticated userId as a prop to render a number of memories equal to however many are tied to the authenticated in user.
@@ -27,7 +28,6 @@ class MemoryContainer extends React.Component {
           this.setState({
             memories: res.data
           })
-          console.log(this.props.displayedUser)
         })
         .catch((err) => {
           console.log(err)

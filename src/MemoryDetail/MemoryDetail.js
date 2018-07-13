@@ -1,6 +1,7 @@
 import React from 'react'
 import CommentForm from '../CommentForm/CommentForm'
 import axios from 'axios'
+import './MemoryDetail.css'
 
 // Notes: This component will receive props from App.js. MemorySquare should have an event listener which 'hears' that it's been clicked, sets the state of App.js to select a specific memory, and then App.js passes that memoryId to memoryDetail as a prop.
 // Note added by Isaiah: Easier to just use the RESTful React Router <Link> in the MemorySquare.js file
@@ -18,6 +19,7 @@ class MemoryDetail extends React.Component {
       createdAt: '',
       comments: []
     }
+    this.deleteMemory = this.deleteMemory.bind(this)
   }
 
   componentDidMount () {
@@ -26,8 +28,9 @@ class MemoryDetail extends React.Component {
       .then((res) => {
         console.log(res)
         this.setState({
+          id: res.data._id,
           titleString: res.data.titleString,
-          authorName: res.data.authorName,
+          authorName: res.data.authorName[0].firstName,
           postString: res.data.postString,
           imageURL: res.data.imageURL,
           createdAt: res.data.createdAt,
@@ -41,20 +44,26 @@ class MemoryDetail extends React.Component {
 
   render () {
     let title = this.state.titleString
-    let name = this.state.authorName.firstName
+    let name = this.state.authorName
     let post = this.state.postString
     let URL = this.state.imageURL
     let date = this.state.createdAt
     let comments = this.state.comments
     return (
-      <div className='MemoryDetailContainer'>
-        <img src={URL} />
-        <h2>{title}</h2>
-        <p>{post}</p>
-        <p>This memory was recorded by {name} on {date}</p>
-        <CommentForm comments={comments} memoryID={this.props.id} />
+      <div className='detailcontainer'>
+        <img className='memoryimage'src={URL} />
+        <h2 className='detailtitle'>{title}</h2>
+        <p className='detailtext'>{post}</p>
+        <p className='detailinfo'>This memory was recorded by {name} on {date}</p>
+        {/* <CommentForm comments={comments} memoryID={this.props.id} /> */}
+        <input className='deletebutton' type='submit' value='Delete Memory' onClick={this.deleteMemory} />
       </div>
     )
+  }
+  deleteMemory () {
+    axios.delete('https://remory-backend.herokuapp.com/memory/:id', {
+      id: this.state.id
+    })
   }
 }
 
