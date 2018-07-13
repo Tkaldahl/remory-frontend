@@ -27,7 +27,7 @@ class MemoryDetail extends React.Component {
         console.log(res)
         this.setState({
           titleString: res.data.titleString,
-          authorName: res.data.authorName,
+          authorName: res.data.authorName[0].firstName,
           postString: res.data.postString,
           imageURL: res.data.imageURL,
           createdAt: res.data.createdAt,
@@ -41,7 +41,7 @@ class MemoryDetail extends React.Component {
 
   render () {
     let title = this.state.titleString
-    let name = this.state.authorName.firstName
+    let name = this.state.authorName
     let post = this.state.postString
     let URL = this.state.imageURL
     let date = this.state.createdAt
@@ -52,7 +52,7 @@ class MemoryDetail extends React.Component {
         <h2>{title}</h2>
         <p>{post}</p>
         <p>This memory was recorded by {name} on {date}</p>
-        <CommentForm comments={comments} memoryID={this.props.id} />
+        {/* <CommentForm comments={comments} memoryID={this.props.id} /> */}
       </div>
     )
   }
