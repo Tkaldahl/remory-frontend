@@ -61,7 +61,7 @@ class MemoryDetail extends React.Component {
     )
   }
   deleteMemory () {
-    axios.delete('http://localhost:4000/user/signup', {
+    axios.delete('http://localhost:4000/memory/:id', {
       id: this.state.id
     })
   }
