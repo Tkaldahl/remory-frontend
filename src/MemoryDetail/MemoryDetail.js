@@ -22,7 +22,7 @@ class MemoryDetail extends React.Component {
 
   componentDidMount () {
     console.log('MemoryDetail component DidMount: GET at API for memory')
-    axios.get(`http://localhost:4000/memory/${this.props.id}`)
+    axios.get(`https://remory-backend.herokuapp.com/memory/${this.props.id}`)
       .then((res) => {
         console.log(res)
         this.setState({
