@@ -55,6 +55,7 @@ class App extends Component {
     this.setState({
       email: '',
       password: '',
+      displayedUser: '',
       isLoggedIn: false
     })
     localStorage.clear()
