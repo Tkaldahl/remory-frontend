@@ -24,7 +24,7 @@ class App extends Component {
       lastName: '',
       profPicture: '',
       isLoggedIn: false,
-      loggedInUser: '',
+      displayedUser: '',
       searchedUser: ''
     }
     this.inputHandler = this.inputHandler.bind(this)
@@ -111,7 +111,7 @@ class App extends Component {
         var loggedInUser = this.jwtDecode(localStorage.token)
         this.setState({
           isLoggedIn: true,
-          loggedInUser: loggedInUser
+          displayedUser: loggedInUser
         })
         console.log(this.state.loggedInUser)
       })
@@ -198,7 +198,11 @@ class App extends Component {
               render={(props) => {
                 // const isLoggedIn = this.state.isLoggedIn
                 if (this.state.isLoggedIn) {
-                  return <MemoryContainer />
+                  return <MemoryContainer 
+                  {...this.props}
+                  {...this.routerParams}
+                  displayedUser={this.state.displayedUser}
+                  />
                 } else {
                   return <Landing />
                 }
