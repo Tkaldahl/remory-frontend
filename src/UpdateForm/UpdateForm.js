@@ -7,6 +7,7 @@ class UpdateForm extends Component {
       <div>
         <form>
           <input type='text' placeholder='Update Memory Details..' />
+          <input type='submit' className='button' value='Submit Changes' />
         </form>
       </div>
     )
