@@ -188,18 +188,6 @@ class App extends Component {
               }}
             />
             <Route
-              path='memory/update'
-              exact
-              render={(props) => {
-                return (
-                  <UpdateForm
-                    {...this.props}
-                    inputHandler={this.inputHandler}
-                  />
-                )
-              }}
-            />
-            <Route
               path='/memory/:id'
               render={props => {
                 console.log('path works')
