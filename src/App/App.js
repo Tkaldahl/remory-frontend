@@ -79,7 +79,7 @@ class App extends Component {
 
   handleSignup (e) {
     e.preventDefault()
-    axios.post('http://localhost:4000/user/signup', {
+    axios.post('https://remory-backend.herokuapp.com/user/signup', {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
@@ -105,7 +105,7 @@ class App extends Component {
 
   handleLogin (e) {
     e.preventDefault()
-    axios.post('http://localhost:4000/user/login', {
+    axios.post('https://remory-backend.herokuapp.com/user/login', {
       email: this.state.email,
       password: this.state.password
     })
@@ -123,7 +123,7 @@ class App extends Component {
 
   handleSearch (e) {
     e.preventDefault()
-    axios.post('http://localhost:4000/user/search', {
+    axios.post('https://remory-backend.herokuapp.com/user/search', {
       email: this.state.email
     })
       .then(response => {
