@@ -54,7 +54,7 @@ class App extends Component {
 
   componentDidMount () {
     if (window.location.origin === 'http://localhost:3000') {
-      this.setState({ originURL: 'http://localhost:4000' })
+      this.setState({ originURL: 'http://localhost:3001' })
       this.checkLocalStorageToken()
       return
     }
@@ -115,6 +115,7 @@ class App extends Component {
 
   handleLogin (e) {
     e.preventDefault()
+    console.log(this.state.originURL)
     axios.post(`${this.state.originURL}/user/login`, {
       email: this.state.email,
       password: this.state.password
@@ -191,7 +192,8 @@ class App extends Component {
                 console.log(props)
                 return (
                   <MemoryForm
-                    {...this.props}
+                    // {...this.props}
+                    originURL={this.state.originURL}
                     inputHandler={this.inputHandler}
                     displayedUser={this.state.displayedUser}
                   />
