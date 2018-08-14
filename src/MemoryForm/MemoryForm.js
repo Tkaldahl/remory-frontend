@@ -62,7 +62,8 @@ class MemoryForm extends React.Component {
   }
   createMemory (e) {
     e.preventDefault()
-    console.log('AXIOS POST CREATEMEMORY()')
+    console.log('AXIOS POST CREATEMEMORY() at the address below')
+    console.log(`${this.props.originURL}/memory`)
     axios.post(`${this.props.originURL}/memory`, {
       titleString: this.state.titleString,
       imageURL: this.state.imageURL,
