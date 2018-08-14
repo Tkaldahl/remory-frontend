@@ -1,6 +1,7 @@
 import React from 'react'
 import MemorySquare from '../MemorySquare/MemorySquare'
-import { Link } from 'react-router-dom'
+import MemoryDetail from '../MemoryDetail/MemoryDetail'
+import { Link, Route } from 'react-router-dom'
 import axios from 'axios'
 
 // This component will receive the authenticated userId as a prop to render a number of memories equal to however many are tied to the authenticated in user.
@@ -20,20 +21,19 @@ class MemoryContainer extends React.Component {
     //   origin = 'http://remory-api.herokuapp.com/'
     // }
     if (this.props.searchedUser) {
-      axios.post(`http://localhost:4000/memory/search`, {id: this.props.searchedUser})
+      axios.post(`${this.props.originURL}/memory/search`, {id: this.props.searchedUser})
         .then((res) => {
         // console.log(origin)
           console.log(res)
           this.setState({
             memories: res.data
           })
-          console.log(this.props.displayedUser)
         })
         .catch((err) => {
           console.log(err)
         })
     } else {
-      axios.post(`http://localhost:4000/memory/search`, {id: this.props.displayedUser})
+      axios.post(`${this.props.originURL}/memory/search`, {id: this.props.displayedUser})
         .then((res) => {
         // console.log(origin)
           console.log(res)

@@ -12,6 +12,7 @@ import MemoryForm from '../MemoryForm/MemoryForm'
 import SearchForm from '../SearchForm/SearchForm'
 import LoginForm from '../LoginForm/LoginForm'
 import SignUpForm from '../SignupForm/SignupForm'
+import UpdateForm from '../UpdateForm/UpdateForm'
 
 class App extends Component {
   constructor () {
@@ -26,7 +27,8 @@ class App extends Component {
       isLoggedIn: false,
       displayedUser: '',
       searchedUser: '',
-      redirect: false
+      redirect: false,
+      originURL: 'https://remory-backend.herokuapp.com'
     }
     this.inputHandler = this.inputHandler.bind(this)
     this.handleSignup = this.handleSignup.bind(this)
@@ -34,21 +36,29 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.redirectHome = this.redirectHome.bind(this)
+    this.checkLocalStorageToken = this.checkLocalStorageToken.bind(this)
   }
 
-  componentDidMount () {
-    console.log(localStorage.token)
-    console.log('searched user =', this.state.searchedUser)
-    console.log(this.state.displayedUser)
+  checkLocalStorageToken () {
     if (localStorage.token) {
       this.setState({
         isLoggedIn: true
       })
+      console.log(localStorage.token.id)
     } else {
       this.setState({
         isLoggedIn: false
       })
     }
+  }
+
+  componentDidMount () {
+    if (window.location.origin === 'http://localhost:3000') {
+      this.setState({ originURL: 'http://localhost:3001' })
+      this.checkLocalStorageToken()
+      return
+    }
+    this.checkLocalStorageToken()
   }
 
   inputHandler (e) {
@@ -79,7 +89,7 @@ class App extends Component {
 
   handleSignup (e) {
     e.preventDefault()
-    axios.post('http://localhost:4000/user/signup', {
+    axios.post(`${this.state.originURL}/user/signup`, {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
@@ -105,7 +115,8 @@ class App extends Component {
 
   handleLogin (e) {
     e.preventDefault()
-    axios.post('http://localhost:4000/user/login', {
+    console.log(this.state.originURL)
+    axios.post(`${this.state.originURL}/user/login`, {
       email: this.state.email,
       password: this.state.password
     })
@@ -123,7 +134,7 @@ class App extends Component {
 
   handleSearch (e) {
     e.preventDefault()
-    axios.post('http://localhost:4000/user/search', {
+    axios.post(`${this.state.originURL}/user/search`, {
       email: this.state.email
     })
       .then(response => {
@@ -156,6 +167,54 @@ class App extends Component {
         <main>
           <Switch>
             <Route
+              path='/'
+              exact
+              render={(props) => {
+                console.log(this.state.displayedUser)
+                // const isLoggedIn = this.state.isLoggedIn
+                if (this.state.isLoggedIn || this.state.searchedUser) {
+                  return <MemoryContainer
+                    {...this.props}
+                    {...this.routerParams}
+                    displayedUser={this.state.displayedUser}
+                    searchedUser={this.state.searchedUser}
+                    originURL={this.state.originURL}
+                  />
+                } else {
+                  return <Landing />
+                }
+              }}
+            />
+            <Route
+              path='/memory/new'
+              exact
+              render={(props) => {
+                console.log(props)
+                return (
+                  <MemoryForm
+                    // {...this.props}
+                    originURL={this.state.originURL}
+                    inputHandler={this.inputHandler}
+                    displayedUser={this.state.displayedUser}
+                  />
+                )
+              }}
+            />
+            <Route
+              path='/memory/:id'
+              render={props => {
+                console.log('path works')
+                return <MemoryDetail
+                  // {...routerParams}
+                  {...props.match.params}
+                  handleSearch={this.handleSearch}
+                  inputHandler={this.inputHandler}
+                  redirect={this.state.redirect}
+                  originURL={this.state.originURL}
+                />
+              }}
+            />
+            <Route
               path='/user/login'
               render={(props) => {
                 return (
@@ -175,18 +234,8 @@ class App extends Component {
                     {...this.props}
                     handleSignup={this.handleSignup}
                     inputHandler={this.inputHandler}
-                  />
-                )
-              }}
-            />
-            <Route
-              path='/memory/new'
-              render={(props) => {
-                return (
-                  <MemoryForm
-                    {...this.props}
-                    inputHandler={this.inputHandler}
                     displayedUser={this.state.displayedUser}
+                    originURL={this.state.originURL}
                   />
                 )
               }}
@@ -203,35 +252,6 @@ class App extends Component {
                     redirect={this.state.redirect}
                   />
                 )
-              }}
-            />
-            <Route
-              path='/'
-              render={(props) => {
-                console.log(this.state.displayedUser)
-                // const isLoggedIn = this.state.isLoggedIn
-                if (this.state.isLoggedIn || this.state.searchedUser) {
-                  return <MemoryContainer
-                    {...this.props}
-                    {...this.routerParams}
-                    displayedUser={this.state.displayedUser}
-                    searchedUser={this.state.searchedUser}
-                  />
-               } else {
-                  return <Landing />
-                }
-              }}
-            />
-            <Route
-              path='/memory/:id'
-              render={props => {
-                return <MemoryDetail
-                  // {...routerParams}
-                  {...props.match.params}
-                  handleSearch={this.handleSearch}
-                  inputHandler={this.inputHandler}
-                  redirect={this.state.redirect}
-                />
               }}
             />
           </Switch>
