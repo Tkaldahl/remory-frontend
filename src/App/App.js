@@ -80,7 +80,7 @@ class App extends Component {
 
   handleSignup (e) {
     e.preventDefault()
-    axios.post('https://remory-backend.herokuapp.com/user/signup', {
+    axios.post('http://localhost:3001/user/signup'/* https://remory-backend.herokuapp.com/user/signup' */, {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       email: this.state.email,
@@ -106,7 +106,7 @@ class App extends Component {
 
   handleLogin (e) {
     e.preventDefault()
-    axios.post('https://remory-backend.herokuapp.com/user/login', {
+    axios.post('http://localhost:3001/user/login' /* 'https://remory-backend.herokuapp.com/user/login' */, {
       email: this.state.email,
       password: this.state.password
     })
@@ -178,6 +178,7 @@ class App extends Component {
               path='/memory/new'
               exact
               render={(props) => {
+                console.log(props)
                 return (
                   <MemoryForm
                     {...this.props}
