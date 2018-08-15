@@ -203,7 +203,6 @@ class App extends Component {
             <Route
               path='/memory/:id'
               render={props => {
-                console.log('path works')
                 return <MemoryDetail
                   // {...routerParams}
                   {...props.match.params}
