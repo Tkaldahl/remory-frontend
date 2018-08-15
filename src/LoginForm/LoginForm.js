@@ -6,7 +6,7 @@ class LoginForm extends React.Component {
       <div className='LoginFormContainer'>
         <form>
           <input type='text' className='email' placeholder='Email' onChange={this.props.inputHandler} />
-          <input type='text' className='password' placeholder='Password' onChange={this.props.inputHandler} />
+          <input type='password' className='password' placeholder='Password' onChange={this.props.inputHandler} />
           <input type='submit' className='submitButton JS' onClick={this.props.handleLogin} />
         </form>
       </div>
