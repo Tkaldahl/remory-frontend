@@ -15,8 +15,8 @@ class MemoryContainer extends React.Component {
 
   componentDidMount () {
     // let origin
-    // if (window.location.origin === 'http://localhost:4000') {
-    //   origin = 'http://localhost:4000'
+    // if (window.location.origin === 'http://localhost:3001') {
+    //   origin = 'http://localhost:3001'
     // } else {
     //   origin = 'http://remory-api.herokuapp.com/'
     // }
@@ -47,7 +47,7 @@ class MemoryContainer extends React.Component {
         })
     }
     // else {
-    //   axios.post(`http://localhost:4000/memory/search`, {id: '5b466ba172457d31dbb38ad5'})
+    //   axios.post(`http://localhost:3001/memory/search`, {id: '5b466ba172457d31dbb38ad5'})
     //     .then((res) => {
     //     // console.log(origin)
     //       console.log(res)
