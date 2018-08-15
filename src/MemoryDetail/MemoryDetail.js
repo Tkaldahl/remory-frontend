@@ -67,6 +67,7 @@ class MemoryDetail extends React.Component {
             return (
               <UpdateForm
                 {...this.props}
+                id={this.state.id}
                 inputHandler={this.inputHandler}
               />
             )
