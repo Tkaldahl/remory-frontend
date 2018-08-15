@@ -67,6 +67,7 @@ class MemoryDetail extends React.Component {
             return (
               <UpdateForm
                 {...this.props}
+                id={this.state.id}
                 inputHandler={this.inputHandler}
               />
             )
@@ -79,8 +80,8 @@ class MemoryDetail extends React.Component {
   deleteMemory () {
     console.log('Memory was deleted')
     console.log(this.state.id)
-    axios.delete('https://localhost4000/memory/:id', {
-      id: this.state.id
+    axios.delete(`${this.props.originURL}/memory/:id`, { data:
+    { id: this.state.id }
     })
   }
 }
